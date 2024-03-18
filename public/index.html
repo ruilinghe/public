@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Amusement Park Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> <!-- Your custom styles -->
+</head>
+<body>
+    <div id="toast-container" class="toast-container">
+        <!-- Toast 消息将在这里动态添加 -->
+    </div>
+    
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-bright border-right" id="sidebar-wrapper">
+            <div class="user-info text-center">
+                <img src="img/use_avatar.jpg" class="img-fluid rounded-circle" alt="User" style="width: 50%; margin-top: 15px;"> <!-- Adjust the source as needed -->
+                <p style="margin-top: 15px; margin-bottom: 25px;">Staff A</p> 
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="index.html" class="list-group-item list-group-item-action bg-bright active" id="link-dashboard">Dashboard</a>
+                <a href="statistics.html" class="list-group-item list-group-item-action bg-bright" id="link-statistics">Statistics</a>
+            </div>
+        </div>
+        
+        <!-- Main content -->
+        <div class="container-fluid">
+            <div class="row">
+
+                <!--Left Part General condition of facility -->
+                <div id="left-card" class="col-lg-6">
+                    <h5 class="mb-3">General condition of facility</h5>
+                    <div class="shadow-sm p-2 mb-2 bg-white rounded">
+                        <div class="card-body" style="padding: 5px 40px 10px 10px;">
+                            <div class="d-flex justify-content-between mb-2 align-items-center">
+                                <div style="margin: 5px 0px 0px 5px; font-size: small;">
+                                    <span class="status-indicator normal"></span><span class="status-text">Normal</span>
+                                    <span class="status-indicator crowded"></span><span class="status-text">Crowded</span>
+                                    <span class="status-indicator breakdown"></span><span class="status-text">Breakdown</span>
+                                </div>
+                                <div style="font-size: small; color: gray;">Update time: <span id="update-time">2024/03/14 17:02:07</span></div>
+                            </div>
+
+                            <!-- Facilities will be loaded here -->
+                            <div class="row" id="facilities-container">
+                            <!-- Facility cards will be generated and inserted here -->
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                    <h5 style="margin-left: 10px;">Working Log</h5>
+                    <div class="shadow-sm p-2 mb-2 bg-white rounded">
+                        <div class="card-body" style="padding: 15px 20px 10px 10px;"> 
+                            <div class="list-group" id="working-log-container" style="margin-left: 10px;">
+                            <!-- Working log entries will be generated and inserted here -->
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+                <!-- Right Part -->
+                <div id="right-card" class="col-lg-6">
+                    
+                    <!-- Traffic flow chart -->
+                    <h5 class="mb-3">Traffic flow chart</h5>
+                    <div class="shadow-sm p-2 mb-2 bg-white rounded">
+                        <div class="card-body" style="padding: 0px 40px 0px 10px;">
+                            <div id="facilities-selector" class="mb-3">
+                                <select id="facility-select" class="form-select" multiple aria-label="Facilities select">
+                                  <!-- 选项将通过 JavaScript 动态生成 -->
+                                </select>
+                                <button id="update-chart" class="btn btn-primary mt-2" style="width: 100px;font-size: x-small;height:30px">Update Chart</button>
+                            </div>
+                            <div >
+                                <canvas id="trafficChart"></canvas>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Status Control -->
+                    <h5 class="mb-3">Status Control</h5>
+                    <div class="shadow-sm p-2 mb-2 bg-white rounded">
+                        <div class="card-body" id="status-control" style="padding: 5px 40px 10px 10px;">
+                        <!-- Status control content -->
+                            <span style="font-size: small;">To Facility</span>
+                            <select id="facility-select-status" class="form-select" style="width: 200px;">
+                                <!-- 动态加载设施选项 -->
+                            </select>
+                            <span style="font-size: small;">To Status</span>
+                            <div id="status-buttons">
+                                <button class="status-btn one" data-status="Normal">Normal</button>
+                                <button class="status-btn two" data-status="Crowded">Crowded</button>
+                                <button class="status-btn three" data-status="Breakdown">Breakdown</button>
+                            </div>
+                            <button id="confirm-status" class="btn btn-primary " style="margin-left: 20px;width: 70px;font-size: x-small;height:30px">Confirm</button>
+                        </div>
+                    </div>
+
+                    <!-- Affairs Comment -->
+                    <h5 class="mb-3">Affairs Comment</h5>
+                    <div class="shadow-sm p-2 mb-2 bg-white rounded">
+                        <div class="card-body" id="affairs-comment" style="padding: 0px 40px 0px 10px;">
+                            <!-- Comment form -->
+                            <div id="affairs-comment" class="comment-section">
+                                <div class="comment-select">
+                                    <label for="facility-select-comment" style="font-size: small;">To Facility</label>
+                                    <select id="facility-select-comment" class="form-select">
+                                        <!-- 设施选项 -->
+                                    </select>
+                                </div>
+                                <div class="comment-input">
+                                    <div class="comment-box" style="display: flex; margin-left: 0px;">
+                                        <label for="comment-input" style="font-size: small;">Your comment</label>
+                                        <button id="send-comment" class="btn btn-primary btn-send"style="margin-left: 20px; padding: 5px;width: 50px;font-size: x-small;height:25px">Send</button>
+                                    </div>
+                                    <textarea id="comment-input"  class="form-textarea"></textarea>
+                                    
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>    
+
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.x/date-fns.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="app.js"></script> <!-- Your JavaScript for fetching and displaying data -->
+</body>
+</html>
+

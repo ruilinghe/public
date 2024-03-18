@@ -1,0 +1,243 @@
+.toast-container {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    text-align: center;
+}
+
+.toast-message {
+    display: inline-block;
+    background-color: #73b3f8;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    animation: fadeOut 2s;
+    animation-delay: 1s;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; visibility: hidden; }
+}
+
+
+.select2-container {
+    height: 30px;
+    font-size: small;
+ }
+
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 6%;
+    font-size: 12px;
+    
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #333; /* 或您侧边栏的颜色 */
+    text-decoration: none;
+}
+
+.sidebar-link i {
+    margin-right: 10px; /* 图标与文本之间的空间 */
+}
+
+/* 可选：仅在鼠标悬停时显示文本 */
+.sidebar-link:hover .link-text {
+    display: inline;
+}
+
+.link-text {
+    display: none; /* 默认不显示文本 */
+    margin-left: 10px; /* 文本和图标之间的距离 */
+}
+
+.list-group-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Custom layout for facility cards */
+.facility-card {
+    width: 100px;
+    height: 140px;
+    margin: 0px 0px 10px 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 3px; /
+}
+
+.normal{
+    background-image: linear-gradient(to top, #99CCF0 0%, #ffffff 100%);
+    border: solid 1px #278ED9;
+}
+.crowded { 
+    background-image: linear-gradient(to top, #feada6 0%, #ffffff 100%);
+    border: solid 1px #D97C27;
+} /* Orange */
+.breakdown { 
+    background-image: linear-gradient(to top, #ff0844 0%, #ffffff 100%); 
+    border: solid 1px #D92727;
+} /* Red */
+
+/* Working log styles */
+#working-log-container {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+/* 定制滚动条的样式 */
+#working-log-container::-webkit-scrollbar {
+    width: 12px;  /* 滚动条的宽度 */
+}
+
+#working-log-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 滚动条轨道的颜色 */
+    border-radius: 10px; /* 滚动条轨道的圆角 */
+}
+
+#working-log-container::-webkit-scrollbar-thumb {
+    background: #99CCF0; /* 滚动条的颜色 */
+    border-radius: 10px; /* 滚动条的圆角 */
+}
+
+#working-log-container::-webkit-scrollbar-thumb:hover {
+    background: #278ED9; /* 滚动条悬停时的颜色 */
+}
+
+/* Traffic flow chart styles */
+.traffic-flow {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* General padding and margin */
+.container-fluid {
+    padding-top: 20px;
+}
+
+.log-entry {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f8f9fa; /* Light grey background */
+    border-left: 5px solid; /* Default, color changes with log type */
+    font-size: 14px;
+    font-size: small;
+}
+
+.log-facility {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.log-reply {
+    border-color: #278ED9; /* Change as needed */
+    color: #278ED9; /* Change as needed */
+}
+
+.log-fault {
+    border-color: #D92727; /* Change as needed */
+    color: #D92727; /* Change as needed */
+}
+
+.log-warning {
+    border-color: #feada6; /* Change as needed */
+    color: #feada6; /* Change as needed */
+}
+
+#status-buttons {
+    display: inline-block; 
+    margin-left: 10px;  
+}
+
+.status-btn {
+    margin: -3px;
+    padding: 5px 10px; /* 内边距 */
+    cursor: pointer; /* 鼠标悬停时显示指针 */
+    background-color: #fff; /* 默认背景颜色 */
+    color: #007bff; /* 文字颜色 */
+    border: 1px solid #007bff; /* 边框颜色 */
+    font-size: small;
+    height: 30px;
+}
+
+.status-btn.one{
+    border-radius: 10px 0px 0px 10px;
+}
+
+.status-btn.three{
+    border-radius: 0px 10px 10px 0px;
+}
+
+.status-btn.active {
+    background-color: #007bff; /* 激活状态的背景颜色 */
+    color: white; /* 激活状态的文字颜色 */
+}
+
+.status-btn:focus{
+    outline: 2px solid #55a4f9db; /* 边框颜色 */
+}
+
+.comment-section {
+    display: flex;
+    justify-content: space-between; /* 确保子元素间有空间 */
+    align-items: start; /* 对齐到顶部 */
+    margin-bottom: 20px; /* 需要的话添加一些底部外边距 */
+}
+
+.comment-select {
+    flex: 1; /* 使它可以根据内容调整大小 */
+    margin-right: 20px; /* 添加右边距 */
+}
+
+.comment-input {
+    flex: 3; /* 分配更多空间给输入区 */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-textarea {
+    resize: vertical; /* 允许垂直调整大小 */
+    height: 50px; /* 初始高度 */
+    margin-bottom: 0px; /* 和发送按钮之间的间距 */
+}
+
+.comment-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px; /* 给输入框添加圆角 */
+    border: 2px solid #ced4da; /* 更改边框颜色和宽度 */
+    outline: none; /* 移除聚焦时的默认轮廓 */
+    resize: none; /* 禁止调整大小 */
+    font-size: 14px; /* 字体大小调整 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加轻微的阴影 */
+    transition: border-color 0.3s ease-in-out; /* 平滑过渡效果 */
+}
+
+.form-textarea:focus {
+    border-color: #80bdff; /* 输入框聚焦时的边框颜色 */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* 聚焦时的阴影效果 */
+}

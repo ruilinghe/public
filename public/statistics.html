@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Amusement Park Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vicestyles.css"> <!-- Your custom styles -->
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-bright border-right" id="sidebar-wrapper">
+            <div class="user-info text-center">
+                <img src="img/use_avatar.jpg" class="img-fluid rounded-circle" alt="User" style="width: 50%; margin-top: 15px;"> <!-- Adjust the source as needed -->
+                <p style="margin-top: 15px; margin-bottom: 25px;">Staff A</p> 
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="index.html" class="list-group-item list-group-item-action bg-bright " id="link-dashboard">Dashboard</a>
+                <a href="statistics.html" class="list-group-item list-group-item-action bg-bright active" id="link-statistics">Statistics</a>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="container-fluid" style="margin-top: 10px;">
+            <div class="row">
+
+                <!--Left Part -->
+                <div id="left-card" class="col-lg-6">
+
+                    <h5 class="mb-3">Peak time Chart</h5>
+                    <div class="shadow-sm p-2 mb-2 bg-white rounded">
+                        <div class="card-body" style="padding: 5px 40px 10px 10px;">
+
+                            <div id="facilities-selector" class="mb-3" style="margin-left: 10px;">
+                                <select id="facility-select" class="form-select" multiple="multiple">
+                                    <!-- 选项将通过 JavaScript 动态生成 -->
+                                </select>
+                                <button id="update-chart" class="btn btn-primary mt-2" style="width: 100px;font-size: x-small;height:30px;margin-left: 10px;">
+                                    Update Chart</button>
+                                <div class="date-picker" style="display: flex; flex-direction: row;">
+                                    <span style="font-size: small; margin-top: 10px;">From</span>
+                                    <input type="date" id="start-date" class="form-control">
+                                    <span style="font-size: small; margin-top: 10px;">To</span>
+                                    <input type="date" id="end-date" class="form-control">
+                                </div>
+                                
+                            </div>
+                            
+                            <div style="min-width: 400px; min-height: 250px;">
+                                <canvas id="trafficChart"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2 align-items-center">
+                        <h5 style="margin-left: 10px;">Facility Utilization Rate</h5>
+                        <div style="font-size: small; color: gray;">Time range from <span id="start-time">2023-12-25</span> to <span id="end-time">2023-12-25</span></div>
+                    </div>
+                    <div class="shadow-sm p-2 mb-2 bg-white rounded">
+                        <div class="card-body"  style="padding: 0px 20px 10px 10px;"> 
+                            <div class="row" id="facility-utilization"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <!-- Right Part -->
+                <div id="right-card" class="col-lg-6">
+
+                    <div class="d-flex justify-content-between mb-2 align-items-center">
+                        <h5 style="margin-left: 10px;">Popular Facility Rank</h5>
+                        <div style="font-size: small; color: gray;margin-right: 10px;">Time range from <span id="start-time">2023-12-25</span> to <span id="end-time">2023-12-25</span></div>
+                    </div>
+                    <div class="shadow-sm p-2 mb-2 bg-white rounded">
+                        <div class="card-body" style="padding: 0px 40px 0px 10px;">
+                            <div style="min-width: 400px; min-height: 250px;">
+                                <canvas id="popularityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2 align-items-center">
+                        <h5 style="margin-left: 10px;">Traffic Flow Prediction</h5>
+                        <div style="font-size: small; color: gray;margin-right: 10px;">Based on data from 2023-12-25 to 12-28 to forcast 12-29 and 12-30</span></div>
+                    </div>
+                    <div class="shadow-sm p-2 mb-2 bg-white rounded">
+                        <div class="card-body" id="traffic-prediction-control" style="padding: 5px 40px 10px 10px;">
+                            <select id="prediction-facility-select" class="form-select" >
+                                <!-- Options will be filled by JavaScript -->
+                            </select>
+                            <button id="update-prediction-chart" class="btn btn-primary mt-2" style="width: 100px;font-size: x-small;height:30px;margin-left: 10px;">
+                                Update Chart</button>
+                            <div style="min-width: 400px; min-height: 250px;">
+                                <canvas id="predictionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+                
+            </div>    
+
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.x/date-fns.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="vicepage.js"></script> <!-- Your JavaScript for fetching and displaying data -->
+</body>

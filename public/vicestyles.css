@@ -1,0 +1,47 @@
+.select2-container {
+    height: 30px;
+    font-size: small;
+ }
+
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 6%;
+    font-size: 12px;
+    
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #333; /* 或您侧边栏的颜色 */
+    text-decoration: none;
+}
+
+.sidebar-link i {
+    margin-right: 10px; /* 图标与文本之间的空间 */
+}
+
+/* 可选：仅在鼠标悬停时显示文本 */
+.sidebar-link:hover .link-text {
+    display: inline;
+}
+
+.link-text {
+    display: none; /* 默认不显示文本 */
+    margin-left: 10px; /* 文本和图标之间的距离 */
+}
+
+.list-group-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.form-control{
+    margin: 6px;
+    height: 30px;
+    width: 35%;
+    font-size: small;
+}
+
